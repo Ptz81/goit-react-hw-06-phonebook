@@ -1,12 +1,17 @@
-import { createStore } from "redux";
-const initialState = {
-  contacts: [
-      {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
-      {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
-      {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
-      {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
-  ],
-  filter: ""
+import { configureStore } from "@reduxjs/toolkit";
+import persistReducer from "redux-persist/es/persistReducer";
+import persistStore from "redux-persist/es/persistStore";
+import storage from 'redux-persist/lib/storage';
+import {rootReducer} from './reducer'
+
+const persistConfig = {
+  key: 'root',
+  storage,
 }
-const rootReducer = (state = initialState, action) => {  return state;};
-export const store = createStore(rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+export const store = configureStore({
+ reducer: persistedReducer,
+});
+
+export default persistedReducer;
+export const persist = persistStore(store)
