@@ -1,29 +1,70 @@
 
+// import { useDispatch, useSelector } from 'react-redux';
+// import css from './Filter.module.css';
+// import PropTypes from 'prop-types';
+// import { getFilter } from 'redux/selectors';
+// import { setFilterValue } from 'redux/filtersSlice';
+
+// const Filter = () =>{
+//   const dispatch = useDispatch();
+//   const filter = useSelector(getFilter)
+//   const handleFilterChange = filter => dispatch(setFilterValue(filter));
+
+//   const handleChange = e => {
+//     handleFilterChange(e.target.value);
+//   };
+
+//     return (
+//       <>
+//       <p className={css.filter_text}>
+//         Find contacts by name
+//       </p>
+//         <input
+//         type="text"
+//         name="filter"
+//         className={css.filter_input}
+//         value={filter}
+//         onChange={handleChange}
+//         />
+//       </>
+//     )
+//   }
+
+
+// Filter.propTypes = {
+//   filter: PropTypes.string.isRequired,
+//   filterContact: PropTypes.func.isRequired,
+// }
+
+import { useDispatch, useSelector } from 'react-redux';
 import css from './Filter.module.css';
-import PropTypes from 'prop-types';
+import { getFilter } from 'redux/selectors';
+import { setFilterValue } from 'redux/filtersSlice';
 
-const Filter = ({filter, filterContact}) =>{
+const Filter = () => {
+  const dispatch = useDispatch();
+  const filter = useSelector(getFilter);
+  const handleFilterChange = filter => dispatch(setFilterValue(filter));
 
-    return (
-      <>
-      <p className={css.filter_text}>
-        Find contacts by name
-      </p>
-        <input
+  const handleChange = (e) => {
+    handleFilterChange(e.target.value);
+  };
+
+  return (
+    <>
+      <p className={css.filter_text}>Find contacts by name</p>
+      <input
         type="text"
         name="filter"
         className={css.filter_input}
         value={filter}
-        onChange={filterContact}
-        />
-      </>
-    )
-  }
-
-
-Filter.propTypes = {
-  filter: PropTypes.string.isRequired,
-  filterContact: PropTypes.func.isRequired,
-}
+        onChange={handleChange}
+      />
+    </>
+  );
+};
 
 export default Filter;
+
+
+// export default Filter;
