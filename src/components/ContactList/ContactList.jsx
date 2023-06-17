@@ -7,17 +7,19 @@ import { deleteContact } from "redux/contactsSlice";
 
 const ContactList = () => {
   const dispatch = useDispatch();
-  const filter = useSelector(getFilter);
+  const {filter} = useSelector(getFilter);
   const contacts = useSelector(getContacts);
   if (!contacts) {
     return null
   };
-   if (filter) {
-    contacts.filter(item => item.name.includes(filter));
+   let contactItems = contacts;
+  if (filter) {
+     console.log(filter)
+    contactItems.filter(item => item.name.includes(filter));
   }
     return (
        <ul className={css.contact_list}>
-        {contacts.map((contact) => {
+        {contactItems.map((contact) => {
           return (
             <li className={css.contact_item} key={contact.id}>
               <p>
