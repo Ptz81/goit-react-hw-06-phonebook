@@ -1,9 +1,7 @@
 const { createSlice, nanoid } = require("@reduxjs/toolkit");
-
 const initialState = {
   items: [],
 };
-
 export const contactsSlice = createSlice({
   name: 'contacts',
   initialState,

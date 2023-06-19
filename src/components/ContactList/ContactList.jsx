@@ -1,22 +1,19 @@
 import React from "react";
 import css from '../Phonebook.module.css';
-// import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from "react-redux";
 import { getContacts, getFilter } from "redux/selectors";
 import { deleteContact } from "redux/contactsSlice";
 
 const ContactList = () => {
   const dispatch = useDispatch();
-  const {filter} = useSelector(getFilter);
+  const filter = useSelector(getFilter);
   const contacts = useSelector(getContacts);
-  if (!contacts) {
-    return null
-  };
-   let contactItems = contacts;
+  let contactItems = contacts;
   if (filter) {
-     console.log(filter)
-    contactItems.filter(item => item.name.includes(filter));
-  }
+  const str = filter.trim().toLowerCase();
+  contactItems = contactItems.filter(item => item.name.toLowerCase().includes(str));
+}
+  if(contactItems.length === 0) return null;
     return (
        <ul className={css.contact_list}>
         {contactItems.map((contact) => {
@@ -37,14 +34,4 @@ const ContactList = () => {
       </ul>
     )
 }
-
-// ContactList.propTypes = {
-//   contacts: PropTypes.arrayOf(PropTypes.shape({
-//   id: PropTypes.string.isRequired,
-//   name: PropTypes.string.isRequired,
-//   number: PropTypes.string.isRequired,
-//   })),
-//   deleteContact: PropTypes.func,
-// }
-
 export default ContactList;

@@ -9,14 +9,11 @@ const persistConfig = {
   key: 'root',
   storage,
 };
-
 const rootReducer = combineReducers({
   contacts: contactsReducer,
    filter: filterReducer,
 });
-
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-
 const store = configureStore({
   reducer: persistedReducer,
   middleware: getDefaultMiddleware({
@@ -27,5 +24,4 @@ const store = configureStore({
 });
 
 const persistor = persistStore(store);
-
 export { store, persistor };

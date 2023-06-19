@@ -1,5 +1,4 @@
 import css from './Phonebook.module.css'
-// import shortid from 'shortid';
 import {ContactForm} from './ContactForm/ContactForm'
 import Section from './Section/Section'
 import React from 'react';
@@ -8,10 +7,8 @@ import ContactList from './ContactList/ContactList';
 import { useSelector } from 'react-redux';
 import { getContacts } from 'redux/selectors';
 
-
 const App = () => {
   const contacts = useSelector(getContacts);
-
   return (
     <div className={css.container}>
       <>
@@ -27,5 +24,4 @@ const App = () => {
     </div>
   );
 };
-
 export default App;
